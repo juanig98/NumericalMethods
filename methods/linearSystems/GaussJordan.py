@@ -1,31 +1,50 @@
 import numpy as np
 
 
-def GaussJordan(A, B):
+def GaussJordan(A, B, proc=False):
     # A: Matriz de coeficientes
     # B: Vector de términos independientes
 
     n = len(A)
     m = n + 1
-    AugmentedMatrix = np.hstack((A, B.reshape(-1, 1)))
+    Amp = np.hstack((A, B.reshape(-1, 1)))
+
+    if proc:
+        print("\nMatriz inicial:\n\n{}\n\n".format(Amp))
 
     for i in range(n):
-        pivot_idx = i
+        pivot = i
+
+        if proc:
+            print("---------------------------------------- Paso {} ----------------------------------------".format(i+1))
         for j in range(i + 1, n):
-            if abs(AugmentedMatrix[j, i]) > abs(AugmentedMatrix[pivot_idx, i]):
-                pivot_idx = j
+            if abs(Amp[j, i]) > abs(Amp[pivot, i]):
+                pivot = j
 
-        AugmentedMatrix[[i, pivot_idx], :] = AugmentedMatrix[[pivot_idx, i], :]
+        if pivot != i and proc:
+            print("- Se reemplaza F{} por F{}".format(i+1, pivot+1))
 
-        pivot = AugmentedMatrix[i, i]
-        AugmentedMatrix[i, :] /= pivot
+        Amp[[i, pivot], :] = Amp[[pivot, i], :]
+
+        pivot = Amp[i, i]
+        Amp[i, :] /= pivot
+
+        if proc:
+            print("- Se divide la F{} por {} (pivot)\n\nMatriz:\n{}\n"
+                  .format(i, pivot, Amp))
 
         for j in range(n):
             if j != i:
-                factor = AugmentedMatrix[j, i]
-                AugmentedMatrix[j, :] = AugmentedMatrix[j, :] - \
-                    factor * AugmentedMatrix[i, :]
+                factor = Amp[j, i]
+                Amp[j, :] = Amp[j, :] - \
+                    factor * Amp[i, :]
 
-    solutions = AugmentedMatrix[:, n]
+                if proc:
+                    print("- Se resta la F{} por la F{} multiplicado por {}"
+                          .format(j+1, i+1, factor))
 
-    return solutions
+        if proc:
+            print("\nMatriz resultante del paso {}:\n{}\n"
+                  .format(i, Amp))
+
+    return Amp[:, n]

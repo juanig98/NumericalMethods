@@ -2,6 +2,7 @@ import numpy as np
 
 from methods.linearSystems.ElimGauss import ElimGauss
 from methods.linearSystems.GaussJordan import GaussJordan
+from methods.linearSystems.GaussSeidel import GaussSeidel
 
 
 class Exercise1:
@@ -61,7 +62,7 @@ class Exercise2:
 
         b = np.array([0.0, -2.0, -7.0, 6.0])
 
-        print("Solución:", GaussJordan(A, b))
+        print("Solución:", GaussJordan(A, b, proc=True))
 
     def b():
         A = np.array([
@@ -72,4 +73,21 @@ class Exercise2:
 
         b = np.array([11.0, 3.0, 6.0])
 
-        print("Solución:", GaussJordan(A, b))
+        print("Solución:", GaussJordan(A, b, proc=True))
+
+
+class Exercise8:
+
+    def a():
+        A = np.array([
+            [1.0, 7.0, -3.0],
+            [4.0, -4.0, 9.0],
+            [12.0, -1.0, 3.0],
+        ])
+
+        b = np.array([-51.0, 61.0, 8.0])
+
+        TOL = 0.001
+        MAX = 6.0
+        x0 = np.array([0.0, 0.0, 0.0])
+        print("Solución:", GaussSeidel(A, b, x0, TOL, MAX))

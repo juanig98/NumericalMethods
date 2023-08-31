@@ -1,7 +1,7 @@
 from math import *
 from pprint import pprint
 
-def lu(A):
+def LU(A):
     """
     Implementación del método LU
     Entradas:
