@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def ElimGauss(A, B):
+def ElimGauss(A, B, proc=False):
     # A: Matriz de coeficientes
     # B: Vector de terminos independientes
     # Amp: Matriz ampliada
@@ -21,31 +21,51 @@ def ElimGauss(A, B):
         Amp = np.hstack((A, B.reshape(-1, 1)))
         p = 0
 
+        if proc:
+            print("\nMatriz inicial:\n\n{}".format(Amp))
+
         for i in range(1, n):
             k = i - 1
+
+            if proc:
+                print("\nPaso {}: ".format(i))
 
             # Ordenamiento y pivoteo
             max_idx = np.argmax(np.abs(Amp[k:n, k]))
             b = max_idx + p
-            Amp[[k, b], :] = Amp[[b, k], :] 
+            Amp[[k, b], :] = Amp[[b, k], :]
+
+            # Marco el pivot
+            if proc:
+                print("\n - F{} se divide por {} (marcado de pivot)"
+                      .format(k+1, Amp[k, k]))
+            Amp[k, :] = Amp[k, :] / Amp[k, k]
 
             # Etapa hacia adelante (Eliminacion)
             for j in range(i, n):
                 r = float(Amp[j, k]) / float(Amp[k, k])
                 Amp[j, :] = Amp[j, :] - (r * Amp[k, :])
+                if proc:
+                    print("\n - F{} se resta por la F{} multiplicado por {}"
+                          .format(j+1, k+1, r))
+                    print("\n" + str(Amp))
 
             p += 1
 
+            if i == n-1:
+                if proc:
+                    print("\n - F{} se divide por {}"
+                          .format(i, Amp[i, i]))
+                    Amp[i, :] = Amp[i, :] / Amp[i, i]
+
         # Muestra la matriz después de la eliminación
-        print('Matriz triangular (después de la eliminación)')
-        print(Amp)
+        if proc:
+            print('\n\nMatriz triangular (después de la eliminación)\n\n {}\n'
+                  .format(str(Amp)))
 
         # Etapa hacia atrás (cálculo de incógnitas)
         X = np.zeros(n)
         for i in range(n - 1, -1, -1):
-
             X[i] = (Amp[i, m-1] - np.sum(Amp[i, i+1:n] * X[i+1:n])) / Amp[i, i]
-
-        print('Vector de resultados')
 
         return X

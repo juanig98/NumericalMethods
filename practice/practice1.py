@@ -19,9 +19,7 @@ class Exercise1:
             8.4254
         ])
 
-        solution = ElimGauss(A, b)
-
-        print("Solución:", solution)
+        print("Solución:", ElimGauss(A, b, proc=True))
 
     def b():
         A = np.array([
@@ -36,9 +34,7 @@ class Exercise1:
             0.0
         ])
 
-        solution = ElimGauss(A, b)
-
-        print("Solución:", solution)
+        print("Solución:", ElimGauss(A, b))
 
     def c():
         A = np.array([
@@ -50,9 +46,7 @@ class Exercise1:
 
         b = np.array([27.0, 4.0, 11.0, 49.0])
 
-        solution = ElimGauss(A, b)
-
-        print("Solución:", solution)
+        print("Solución:", ElimGauss(A, b, proc=True))
 
 
 class Exercise2:
@@ -67,9 +61,7 @@ class Exercise2:
 
         b = np.array([0.0, -2.0, -7.0, 6.0])
 
-        solution = GaussJordan(A, b)
-
-        print("Solución:", solution)
+        print("Solución:", GaussJordan(A, b))
 
     def b():
         A = np.array([
@@ -80,6 +72,4 @@ class Exercise2:
 
         b = np.array([11.0, 3.0, 6.0])
 
-        solution = GaussJordan(A, b)
-
-        print("Solución:", solution)
+        print("Solución:", GaussJordan(A, b))
