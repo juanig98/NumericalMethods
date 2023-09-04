@@ -1,5 +1,13 @@
 import numpy as np
-
+"""MÉTODO DE ELIMINACIÓN DE GAUSS
+        Sea el S.E.L. (Sistema de Ecuaciones Lineales) A.X = C, el método de consiste en transformar 
+    la matriz A y concurrentemente el vector C hasta obenter un S.E.L. equivalente (con la misma
+    solución) que sea triangular superior. 
+    
+        El procedimiento consta de dos pasos:
+            1. Eliminación hacia adelante de incógnitas.
+            2. Sustitución hacia atrás.
+"""
 
 def ElimGauss(A, B, proc=False):
     # A: Matriz de coeficientes

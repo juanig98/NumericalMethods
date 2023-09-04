@@ -1,5 +1,11 @@
 import numpy as np
-
+"""MÉTODO DE GAUSS JORDAN
+        Este método difiere con el método de eliminación gaussiana puesto que cuando se elimina 
+        una incógnica no sólo se elimina de las ecuaciones siguientes sino de todas las otras
+        ecuaciones. De esta forma el paso de eliminación genera una matriz identidad en lugar 
+        de una matriz triangular. Por consiguiente no es ncesario emplear la sustitución hacía 
+        atrás para obtener la solución.
+"""
 
 def GaussJordan(A, B, proc=False):
     # A: Matriz de coeficientes

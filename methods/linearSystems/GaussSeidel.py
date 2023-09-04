@@ -1,44 +1,25 @@
 from math import *
 from pprint import pprint
+import numpy as np
 
 
-def distinf(x, y):
-    """Implementación distancia dada por la norma infinito"""
-    return max([abs(x[i]-y[i]) for i in range(len(x))])
-
-def GaussSeidel(A, b, x0, TOL, MAX):
-    """
-    Implementación del método de Gauss-Seidel
-    Entradas:
-    A -- matriz cuadrada
-    b -- vector
-    x0 -- aproximación inicial
-    TOL -- tolerancia
-    MAX -- número máximo de iteraciones
-    Salida:
-    x -- aproximación a solución del sistema Ax = b
-    None -- en caso de agotar las iteraciones o presentar errores
-    """
+def GaussSeidel(A, b, x0, epsilon, max_iterations):
     n = len(A)
-    x = [0.0 for x in range(n)]
-    k = 1
-    while k <= MAX:  
-        for i in range(n):
-            if abs(A[i][i]) <= 1e-15:
-                print("Imposible iterar")
-                return None
-            s1 = sum([A[i][j]*x[j] for j in range(i)])
-            s2 = sum([A[i][j]*x0[j] for j in range(i+1, n)])
-            x[i] = (b[i] - s1 - s2)/A[i][i]
-        pprint(x)
-        if distinf(x, x0) < TOL:
-            print(r"Solución encontrada")
-            return x
-        k += 1
-        for i in range(n):
-            x0[i] = x[i]
-    print("Iteraciones agotadas")
-    return None
+    x = x0.copy()
+
+    # Gauss-Seidal Method [By Bottom Science]
+
+    for i in range(max_iterations):
+        x_new = np.zeros(n)
+        for j in range(n):
+            s1 = np.dot(A[j, :j], x_new[:j])
+            s2 = np.dot(A[j, j + 1:], x[j + 1:])
+            x_new[j] = (b[j] - s1 - s2) / A[j, j]
+        if np.allclose(x, x_new, rtol=epsilon):
+            return x_new
+        x = x_new
+    return x
+
 
 """ 
 TESTING: 

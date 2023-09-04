@@ -1,7 +1,8 @@
 from math import *
 from pprint import pprint
 
-def LU(A):
+
+def LU(A, proc=False):
     """
     Implementación del método LU
     Entradas:
@@ -49,10 +50,11 @@ def LU(A):
         print("Imposible descomponer")
         return None
 
-    print("Matriz L:")
-    pprint(L)
-    print("Matriz U:")
-    pprint(U)
+    if proc:
+        print("Matriz L:")
+        pprint(L)
+        print("Matriz U:")
+        pprint(U)
     return L, U
 
 

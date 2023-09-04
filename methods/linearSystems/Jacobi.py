@@ -1,9 +1,19 @@
 from math import *
 from pprint import pprint
+import numpy as np
 
-def distinf(x, y):
-    """Implementación distancia dada por la norma infinito"""
-    return max([abs(x[i] - y[i]) for i in range(len(x))])
+
+def jacobi(a, b, x):
+    n = len(x)
+    t = x.copy()
+    for i in range(n):
+        s = 0
+        for j in range(n):
+            if i != j:
+                s = s+a[i, j]*t[j]
+                x[i] = (b[i]-s)/a[i, i]
+    return x
+
 
 def Jacobi(A, b, x0, TOL, MAX):
     """
@@ -18,25 +28,19 @@ def Jacobi(A, b, x0, TOL, MAX):
     x -- aproximación a solución del sistema Ax = b
     None -- en caso de agotar las iteraciones o presentar errores
     """
-    n = len(A)
-    x = [0.0 for x in range(n)]
-    k = 1
-    while k <= MAX:
-        for i in range(n):
-            if abs(A[i][i]) <= 1e-15:
-                print("Imposible iterar")
-                return None
-            s = sum([A[i][j]*x0[j] for j in range(n) if j != i])
-            x[i] = (b[i] - s)/A[i][i]
-        pprint(x)
-        if distinf(x, x0) < TOL:
-            print(r"Solución encontrada")
-            return x
-        k += 1
-        for i in range(n):
-            x0[i] = x[i]
-    print("Iteraciones agotadas")
-    return None
+    # n = len(x0)
+    t = x0.copy()
+    for k in range(MAX):
+        x0 = jacobi(A, b, x0)
+        d = np.linalg.norm(np.array(x0)-np.array(t), np.inf)
+        print("Para la iteración "+str(k+1)+": X = " +
+              str(np.transpose(x0.round(7)))+"\tError: "+str(abs(d)))
+        if abs(d) < abs(TOL):
+            return [x0, k]
+        else:
+            t = x0.copy()
+    return [[], MAX]
+
 
 """ 
 TESTING: 
