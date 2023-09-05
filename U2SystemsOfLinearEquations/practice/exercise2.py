@@ -1,5 +1,5 @@
 import numpy as np
-from methods.linearSystems.GaussJordan import GaussJordan
+from U2SystemsOfLinearEquations.methods.GaussJordan import GaussJordan
 
 """
 Resolver los siguientes sistemas de ecuaciones mediante el 

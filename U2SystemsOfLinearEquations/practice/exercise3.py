@@ -1,5 +1,5 @@
 import numpy as np
-from methods.linearSystems.ElimGauss import ElimGauss
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 
 """ 
 Aplicar el método de Gauss con pivoteo parcial.

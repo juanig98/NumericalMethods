@@ -1,5 +1,6 @@
 import numpy as np
- 
+
+from U2SystemsOfLinearEquations.methods.Jacobi import Jacobi
 
 
 class ExerciseUsingJacobi:

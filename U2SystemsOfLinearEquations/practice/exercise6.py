@@ -1,7 +1,6 @@
 import numpy as np
-from methods.linearSystems.ElimGauss import ElimGauss
-
-from methods.linearSystems.GaussJordan import GaussJordan
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
+from U2SystemsOfLinearEquations.methods.GaussJordan import GaussJordan
 
 """ 
 Hallar la solución de los siguientes sistemas tridiagonales

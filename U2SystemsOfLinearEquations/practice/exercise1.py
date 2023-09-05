@@ -1,5 +1,6 @@
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 import numpy as np
-from methods.linearSystems.ElimGauss import ElimGauss
+
 
 """ 
 Resuelva Ios siguientes sistemas lineales usando método
@@ -23,7 +24,8 @@ class ExercisesUsingElimGauss:
         ])
 
         def resolve(self,):
-            print("Solución:", ElimGauss(self.A, self.b, proc=True))
+            print("Solución:",
+                  ElimGauss(self.A, self.b, proc=True))
 
     class ExerciseB:
         A = np.array([

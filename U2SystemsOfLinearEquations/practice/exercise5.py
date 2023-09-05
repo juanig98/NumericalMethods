@@ -1,6 +1,6 @@
 import numpy as np
 
-from methods.linearSystems.LU import LU
+from U2SystemsOfLinearEquations.methods.LU import LU
 
 """ 
 Aplicar el método de factorización para enconÍar solución

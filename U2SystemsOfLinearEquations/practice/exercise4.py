@@ -1,6 +1,6 @@
 import numpy as np
 
-from methods.linearSystems.ElimGauss import ElimGauss
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 
 """
 Una empresa se dedica a la fabricación de cuatro tipos de jabón. 
