@@ -1,6 +1,9 @@
 import numpy as np
-
 from U2SystemsOfLinearEquations.methods.Jacobi import Jacobi
+"""
+Aplicar el método iterativo de Jacobi para resolver los siguientes 
+sistemas hasta que se cumplan las condiciones de error
+"""
 
 
 class ExerciseUsingJacobi:
