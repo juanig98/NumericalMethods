@@ -6,6 +6,8 @@ from U2SystemsOfLinearEquations.methods.Jacobi import Jacobi
 Aplical los métodos itelativos (Jacobi y Seidel) para resolver 
 el siguiente sistema e iterar hasta que se cumpla
 """
+
+
 class ExerciseUsingIterativeMethods:
     A = np.array([
         [7.0,   -1.0,   4.0],
@@ -27,18 +29,24 @@ class ExerciseUsingIterativeMethods:
         0.0
     ])
 
-    def resolve_with_Jacobi(self,):
-        print("Solución:",
-              Jacobi(self.A,
-                     self.b,
-                     self.x0,
-                     self.TOL,
-                     self.MAX))
+    class UsingJacobi:
+        def resolve(self,):
+            print("Aplicando método de Jacobi")
+            print("Solución",
+                  Jacobi(ExerciseUsingIterativeMethods.A,
+                         ExerciseUsingIterativeMethods.b,
+                         ExerciseUsingIterativeMethods.x0,
+                         ExerciseUsingIterativeMethods.TOL,
+                         ExerciseUsingIterativeMethods.MAX,
+                         ))
 
-    def resolve_with_GaussSeidel(self,):
-        print("Solución:",
-              GaussSeidel(self.A,
-                          self.b,
-                          self.x0,
-                          self.TOL,
-                          self.MAX))
+    class UsingGaussSeidel:
+        def resolve(self,):
+            print("Aplicando método de GaussSeidel")
+            print("Solución:",
+                  GaussSeidel(ExerciseUsingIterativeMethods.A,
+                              ExerciseUsingIterativeMethods.b,
+                              ExerciseUsingIterativeMethods.x0,
+                              ExerciseUsingIterativeMethods.TOL,
+                              ExerciseUsingIterativeMethods.MAX,
+                              proc=True))

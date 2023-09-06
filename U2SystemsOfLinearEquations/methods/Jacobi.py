@@ -33,9 +33,11 @@ def Jacobi(A, b, x0, TOL, MAX):
     for k in range(MAX):
         x0 = jacobi(A, b, x0)
         d = np.linalg.norm(np.array(x0)-np.array(t), np.inf)
-        print("Para la iteración "+str(k+1)+": X = " +
-              str(np.transpose(x0.round(7)))+"\tError: "+str(abs(d)))
+        print("\nIteración {}: \t{} \tError: {}"
+              .format(k+1, str(np.transpose(x0.round(7))), abs(d)))
         if abs(d) < abs(TOL):
+            print("\nSe superó la tolerancia máxima!\nEl error es de {} menor a la tolerancia de {}\n"
+                  .format(abs(d), abs(TOL)))
             return [x0, k]
         else:
             t = x0.copy()

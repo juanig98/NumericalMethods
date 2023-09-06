@@ -1,4 +1,7 @@
+
 import numpy as np
+
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 """
 Una empresa necesita para la construcción de un proyecto:
     -> Material A   4800 unidades
@@ -41,5 +44,7 @@ class ConstructionCompany:
         5690.0,
     ], float)
 
-    def resolve():
-        pass
+    def resolve(self,):
+        print("Solución:",
+              ElimGauss(self.A,
+                        self.B, True))

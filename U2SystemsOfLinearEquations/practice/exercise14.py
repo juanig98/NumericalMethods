@@ -1,4 +1,6 @@
 import numpy as np
+
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 """
 Supongamos que en un sistema biológico existen 3 especies de animales y
 3 fuentes de alimentos. Tomemos a bi (i-esimo alinento) para representar
@@ -38,5 +40,7 @@ class BiologicalSystem:
         1300.0,
     ], float)
 
-    def resolve():
-        pass
+    def resolve(self,):
+        print("Solución:",
+              ElimGauss(self.A,
+                        self.B, True))

@@ -3,7 +3,7 @@ from pprint import pprint
 import numpy as np
 
 
-def GaussSeidel(A, b, x0, epsilon, max_iterations):
+def GaussSeidel(A, b, x0, TOL, max_iterations, proc=False):
     n = len(A)
     x = x0.copy()
 
@@ -15,14 +15,24 @@ def GaussSeidel(A, b, x0, epsilon, max_iterations):
             s1 = np.dot(A[j, :j], x_new[:j])
             s2 = np.dot(A[j, j + 1:], x[j + 1:])
             x_new[j] = (b[j] - s1 - s2) / A[j, j]
-        if np.allclose(x, x_new, rtol=epsilon):
+        d = np.linalg.norm(np.array(x_new)-np.array(x), np.inf)
+        if proc:
+            print("\nIteración {}: \t{} \tError: {}"
+                  .format(i+1, x_new, d))
+        if abs(d) < abs(TOL):
+            print("\nSe superó la tolerancia máxima!\nEl error es de {} menor a la tolerancia de {}\n"
+                  .format(abs(d), abs(TOL)))
             return x_new
+        # if np.allclose(x, x_new, rtol=TOL):
+        #     print("\nSe superó la tolerancia máxima!\nEl error es de {} menor a la tolerancia de {}\n"
+        #           .format(abs(d), abs(TOL)))
+        #     return x_new
         x = x_new
     return x
 
 
-""" 
-TESTING: 
+"""
+TESTING:
 A = [[2, 1], [5, 7]]
 b = [11, 13]
 x0 = [1, 1]

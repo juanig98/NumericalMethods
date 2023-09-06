@@ -1,4 +1,6 @@
 import numpy as np
+
+from U2SystemsOfLinearEquations.methods.ElimGauss import ElimGauss
 """
 Una compañia minera trabaja en 3 minas, cada una de ellas produce 3 clases 
 de minerales:
@@ -25,16 +27,18 @@ pedido?
 
 class MiningCompany:
     A = np.array([
-        [4.0, 3.0, 5.0],
-        [1.0, 1.0, 1.0],
-        [2.0, 4.0, 3.0],
+        [4.0, 1.0, 2.0],
+        [3.0, 1.0, 4.0],
+        [5.0, 1.0, 3.0],
     ], float)
 
     B = np.array([
-        10.0,
+        19.0,
         25.0,
         25.0,
     ], float)
 
-    def resolve():
-        pass
+    def resolve(self,):
+        print("Solución:",
+              ElimGauss(self.A,
+                        self.B, True))

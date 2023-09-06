@@ -63,4 +63,5 @@ class ExerciseUsingGaussSeidel:
                               self.b,
                               self.x0,
                               self.TOL,
-                              self.MAX))
+                              self.MAX,
+                              proc=True))
