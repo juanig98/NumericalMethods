@@ -1,5 +1,7 @@
 import numpy as np
+
 from U2SystemsOfLinearEquations.methods.GaussSeidel import GaussSeidel
+
 """
 Aplique la iteración de Gauss-seidel al sistema. Comience con la aproximación xu=O para todo k, e itele hasta que se
 cumpla
@@ -17,7 +19,7 @@ class ExerciseUsingGaussSeidel2:
     b = np.array([
         -1.0,
         0.0,
-        0.0
+        0.0,
         0.0
     ], float)
 

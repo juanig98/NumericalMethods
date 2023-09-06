@@ -8,7 +8,7 @@ def trig(x):
     """Función de prueba"""
     return x*cos(x-1) - sin(x) # retorna trig(x) = x cos(x − 1) − sin(x)
 
-def bisection(f, a, b, tol, n):
+def Bisection(f, a, b, tol, n):
     """
     Implementación método de bisección
     Entradas:
@@ -23,10 +23,13 @@ def bisection(f, a, b, tol, n):
     """
     i = 1
     while i <= n:
-        p = a + (b - a)/2
-        print("i = {0:<2}, p = {1:.12f}".format(i, p))
+        err = (b - a)/2
+        p = a + err
+        print("Iteración {0:<1}: \t\tp = {1:.12f}\t\tError: {2:.12f}".format(i, p, err))
        
-        if abs(f(p)) <= 1e-15 or (b - a)/2 < tol:
+        if abs(f(p)) <= 1e-15 or err < tol:
+            print("\nSe superó la tolerancia máxima!\nEl error es de {} menor a la tolerancia de {}\n"
+                  .format(err, tol))
             return p
        
         i += 1

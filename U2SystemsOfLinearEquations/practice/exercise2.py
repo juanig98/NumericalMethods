@@ -27,7 +27,7 @@ class ExercisesUsingGaussJordan:
         def resolve(self,):
             print("Solución:", GaussJordan(self.A, self.b, proc=True))
 
-    class ExerviseB:
+    class ExerciseB:
         A = np.array([
             [1.0,   2.0,    -4.0],
             [2.0,   5.0,    2.0],
