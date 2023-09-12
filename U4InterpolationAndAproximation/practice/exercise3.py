@@ -12,6 +12,22 @@ Rta: 83,667
 """
 
 
+from U4InterpolationAndAproximation.methods.Lagrange import LagrangePol
+
+
 class ExercisePeopleCity1989:
-    def resolve():
-        pass
+    def resolve(self,):
+        # self.statement()
+        Pf = LagrangePol([
+            (1987, 53),
+            (1988, 71),
+            (1990, 91)
+        ])
+        import numpy as np
+        from scipy.interpolate import lagrange
+        x = np.array([0, 1, 2])
+        y = x**3
+        poly = lagrange(x, y)
+        
+        print("Resultado: {}"
+              .format(Pf(1989)))

@@ -11,9 +11,9 @@
 # ex.resolve()
 
 """ EJERCICIO 3 """
-# from U4InterpolationAndAproximation.practice.exercise3 import ExercisePeopleCity1989
-# ex = ExercisePeopleCity1989()
-# ex.resolve()
+from U4InterpolationAndAproximation.practice.exercise3 import ExercisePeopleCity1989
+ex = ExercisePeopleCity1989()
+ex.resolve()
 
 """ EJERCICIO 4 """
 # from U4InterpolationAndAproximation.practice.exercise4 import ExerciseUsingLagrange

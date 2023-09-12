@@ -13,4 +13,5 @@ Construir, la tabla necesaria
 
 class Exercise:
     def resolve():
+      
         pass
