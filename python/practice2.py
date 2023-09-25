@@ -59,12 +59,12 @@
 # ex.resolve()
 
 """ EJERCICIO 9 """
-# from U2SystemsOfLinearEquations.practice.exercise9 import ExerciseUsingGaussSeidel
+from U2SystemsOfLinearEquations.practice.exercise9 import ExerciseUsingGaussSeidel
 # ex = ExerciseUsingGaussSeidel.ExerciseA()
 # ex.resolve()
 
-# ex = ExerciseUsingGaussSeidel.ExerciseB()
-# ex.resolve()
+ex = ExerciseUsingGaussSeidel.ExerciseB()
+ex.resolve()
 
 """ EJERCICIO 10 """
 # from U2SystemsOfLinearEquations.practice.exercise10 import ExerciseUsingIterativeMethods

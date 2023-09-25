@@ -10,7 +10,7 @@ class ExerciseUsingGaussSeidel:
     class ExerciseA:
         A = np.array([
             [1.0,   7.0,    -3.0],
-            [4.0,   -4.0,   -9.0],
+            [4.0,   -4.0,   9.0],
             [12.0,  -1.0,   3.0],
         ], float)
 
