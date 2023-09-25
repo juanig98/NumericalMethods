@@ -1,37 +1,40 @@
-function SiMec()
-    disp('  -"SIMULACION DE UN SISTEMA MECANICO (Resorte-Amortiguador)-"-')
-    disp('---------------------------------------')
-    fprintf('\n');
+function SiMec(m, k, am, h, ts, filename = false)
+    % m Peso del cuerpo
+    % k Fuerza Resorte
+    % am Fuerza Amortiguador
+    % h Tamaño de paso
+    % ts Tiempo de la simulación
 
-    %Ingreso de Datos
-    disp('  -"DATOS DE LA SIMULACION"-')
-    fprintf('\n');
-    A = input('Ingresar fuerza del resorte (parametro A): ');
-    B = input('Ingresar fuerza del amortiguador (parametro B): ');
+    printf('Simulación del sistema mecánico (Resorte-Amortiguador)')
+    printf('---------------------------------------')
+    A = k;
+    B = am;
     T(1) = 0;
-    %M: Masa
-    P = 1000; %% Peso del cuerpo
-    M = P / 9.8;
-    h = 0.1; %% Paso de la simulacion
-    d = 500; %% Duracion de la simulacion
+    P = m; % Peso del cuerpo
+    M = P / 9.8; % Inercia
+    d = ts; % Duracion de la simulacion
+    dpos = 0; % Desplazamiento maximo
+    dneg = 0; % Desplazamiento minimo
+    tdpos = 0; % Tiempo desplazamiento maximo
+    tvpos = 0; % Tiempo velocidad maxima
+    vpos = 0; % Velocidad maxima
+    vneg = 0; % Velocidad negativa
+    tdneg = 0; % Momento desplazamiento minimo
+    tvneg = 0; % Momento velocidad minima
+    x1 = 0; % Desplazamiento inicial
+    x2 = 0; % Velocidad inicial
 
-    dpos = 0; %desplazamiento maximo
-    tdpos = 0; %tiempo desplazamiento maximo
-    dneg = 0; %desplazamiento minimo
-    tdneg = 0; %momento desplazamineto minimo
-    vpos = 0; %velocidad maxima
-    tvpos = 0; %tiempo velocidad maxima
-    vneg = 0; %velocidad negativa
-    tvneg = 0; %momento velocidad minima
     f = inline('x2', 't', 'x1', 'x2');
     g = inline('co1-co2*x2-co3*x1', 't', 'x1', 'x2', 'co1', 'co2', 'co3');
-
     ls = d / h;
-    x1 = 0; %% desplazamiento inicial
-    x2 = 0; %%  velocidad inicial
     Y(:, 1) = [x1; x2];
-    wti = 0
-    fid = fopen('d:\mecanico.txt', 'w');
+    wti = 0;
+
+    if !filename
+        filename = datestr(date, 0) 
+    end
+
+    fid = fopen(['./tmp/', filename, '.txt'], 'w');
 
     for t = 0:ls
 
@@ -60,9 +63,8 @@ function SiMec()
         x2 = x2 + (k21 + 2 * k22 + 2 * k23 + k24) / 6;
 
         if mod(t, 10) == 0
-            %fprintf('T %3.1f  Desp: %3.4f      Vel:%3.4f',t/10 ,x1 ,x2)
             fprintf(fid, '%f\t%f\t%f\n', t, x1, x2);
-            fprintf('\n');
+
             wti = wti + 1;
             Y(1, wti + 1) = x1;
             Y(2, wti + 1) = x2;
@@ -96,35 +98,21 @@ function SiMec()
 
     fclose(fid);
 
-    %Presentacion de los resultados
-    fprintf('\n');
-    fprintf('\n');
-    disp(' -"RESULTADOS"- ')
-    fprintf('\n');
-    fprintf(' Desplazamiento maximo: %3.4f', dpos);
-    disp(' metros; ')
-    fprintf(' Producido a los: %3.1f', tdpos);
-    disp(' segundos ')
-    fprintf('\n');
-    fprintf('\n');
-    fprintf(' Desplazamiento minimo: %3.4f', dneg);
-    disp(' metros; ')
-    fprintf(' Producido a los: %3.1f', tdneg);
-    disp(' segundos ')
-    fprintf('\n');
-    fprintf('\n');
-    fprintf(' Velocidad maxima: %3.4f', vpos);
-    disp(' m/s; ')
-    fprintf(' Producida a los: %3.1f', tvpos);
-    disp(' segundos ')
-    fprintf('\n');
-    fprintf('\n');
-    fprintf(' Velocidad minima: %3.4f', vneg);
-    disp(' m/s; ')
-    fprintf(' Producida a los: %3.1f', tvneg);
-    disp(' segundos ')
-    %Graficacion de resultados
+    % Presentacion de los resultados
+    printf('\n\nRESULTADOS');
+    printf('\n\nDesplazamiento maximo: %3.4f metros', dpos);
+    printf('\nProducido a los: %3.1f segundos', tdpos);
+    printf('\n\nDesplazamiento minimo: %3.4f metros', dneg);
+    printf('\nProducido a los: %3.1f segundos', tdneg);
+    printf('\n\nVelocidad maxima: %3.4f m/s', vpos);
+    printf('\nProducida a los: %3.1f segundos', tvpos);
+    printf('\n\nVelocidad minima: %3.4f m/s', vneg);
+    printf('\nProducida a los: %3.1f segundos', tvneg);
+
+    % Graficacion de resultados
     plot(T, Y(1, :), '-', T, Y(2, :), ':');
-    xlabel('Tiempo en segundos'); ylabel('Desplazamiento y Velocidad')
+    xlabel('Tiempo en segundos');
+    ylabel('Desplazamiento y Velocidad')
     axis('auto');
     fprintf('\n');
+endfunction
